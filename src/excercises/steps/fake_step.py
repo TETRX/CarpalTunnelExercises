@@ -27,4 +27,5 @@ class FakeStep(Step): # keep your hand in frame for 2 seconds
                         return StepVerificationResult.SUCCESS
                     return StepVerificationResult.IN_PROGRESS
 
+        self.time_started_step = None
         return StepVerificationResult.FAILURE
