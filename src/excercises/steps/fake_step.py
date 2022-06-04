@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+from src.excercises.hand_analysis.compute_angle import compute_joint_angle, Finger, Joint
 from src.excercises.instruction import Instruction
 from src.excercises.step import Step
 from src.excercises.step_verification_result import StepVerificationResult
@@ -23,7 +24,9 @@ class FakeStep(Step): # keep your hand in frame for 2 seconds
                     if self.time_started_step is None:
                         self.time_started_step = datetime.now()
 
-                    if timedelta(seconds=2) <= (datetime.now()-self.time_started_step):
+                    # print(compute_joint_angle(hands,self.which_hand,Finger.INDEX,Joint.SECOND))
+
+                    if timedelta(seconds=5) <= (datetime.now()-self.time_started_step):
                         return StepVerificationResult.SUCCESS
                     return StepVerificationResult.IN_PROGRESS
 
