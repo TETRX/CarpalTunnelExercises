@@ -14,12 +14,11 @@ class Exercise:
     def verify(self, hands):  # returns if we should continue running the exercise
         starting_step = self.current_step
         result = self.steps[self.current_step].verify(hands)
-        while result == StepVerificationResult.SUCCESS:
+        if result == StepVerificationResult.SUCCESS:
             self.current_step += 1
             if self.current_step >= len(self.steps):
                 self.instruction_display.display_success()
                 return False
-            result = self.steps[self.current_step].verify(hands)
         while result == StepVerificationResult.FAILURE:
             self.current_step -= 1
             result = self.steps[self.current_step].verify(hands)

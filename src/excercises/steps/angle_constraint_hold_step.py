@@ -1,19 +1,17 @@
 from datetime import datetime, timedelta
 
-from src.excercises.hand_analysis.compute_angle import compute_joint_angle, Finger, Joint
-from src.excercises.instruction import Instruction
 from src.excercises.step import Step
 from src.excercises.step_verification_result import StepVerificationResult
 from google.protobuf.json_format import MessageToDict
 
-class FakeStep(Step): # keep your hand in frame for 2 seconds
-    def __init__(self, which_hand: str):
-        super().__init__(Instruction(f"Keep your "
-                                     f"{which_hand.lower()} hand visible in your camera.",
-                              None  # TODO
-                              ))
+
+class AngleConstraintHoldStep(Step):
+    def __init__(self, which_hand: str, instruction, hold_time, constraints):
+        super().__init__(instruction)
         self.which_hand = which_hand
         self.time_started_step = None
+        self.hold_time = hold_time
+        self.constraints = constraints
 
     def verify(self, hands):
         if hands.multi_handedness is not None:
@@ -24,9 +22,15 @@ class FakeStep(Step): # keep your hand in frame for 2 seconds
                     if self.time_started_step is None:
                         self.time_started_step = datetime.now()
 
-                    # print(compute_joint_angle(hands,self.which_hand,Finger.INDEX,Joint.SECOND))
+                    constraints_hold = True
+                    for constraint in self.constraints:
+                        if not constraint.verify(hands, self.which_hand):
+                            constraints_hold = False
 
-                    if timedelta(seconds=2) <= (datetime.now()-self.time_started_step):
+                    if not constraints_hold:
+                        break
+
+                    if timedelta(seconds=5) <= (datetime.now()-self.time_started_step):
                         return StepVerificationResult.SUCCESS
                     return StepVerificationResult.IN_PROGRESS
 
