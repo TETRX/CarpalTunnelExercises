@@ -38,7 +38,7 @@ class Exercise:
 
         exercise_uncompleted = True
         with mp_hands.Hands(
-                model_complexity=0,
+                model_complexity=1,
                 min_detection_confidence=0.5,
                 min_tracking_confidence=0.5) as hands:
             while cap.isOpened() and exercise_uncompleted:

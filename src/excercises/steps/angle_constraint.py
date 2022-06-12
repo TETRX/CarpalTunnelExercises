@@ -10,8 +10,12 @@ class AngleConstraint:
 
     def verify(self, hands, which_hand: str):
         angle = compute_joint_angle(hands, which_hand, self.finger, self.joint)
-        # print(f"Finger {self.finger}, joint {self.joint}, angle {angle}")
         if self.smaller:
-            return angle < self.angle
+            result = angle < self.angle
         else:
-            return angle > self.angle
+            result = angle > self.angle
+
+        # if not result:
+        #     print(f"Finger {self.finger}, joint {self.joint}, angle {angle}")
+
+        return result
