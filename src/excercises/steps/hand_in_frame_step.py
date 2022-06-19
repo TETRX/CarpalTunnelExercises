@@ -3,6 +3,7 @@ from src.excercises.step import Step
 from src.excercises.step_verification_result import StepVerificationResult
 from google.protobuf.json_format import MessageToDict
 
+
 class HandInFrameStep(Step):  # prompts us to get our hand in frame. We can pad each step with this since this seems
     # like the most likely failure scenario
     def __init__(self, which_hand: str):
