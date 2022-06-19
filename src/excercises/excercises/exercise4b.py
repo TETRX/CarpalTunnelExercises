@@ -9,7 +9,7 @@ from src.excercises.steps.fake_step import FakeStep
 from src.excercises.steps.hand_in_frame_step import HandInFrameStep
 
 
-def exercise4a(hand):
+def exercise4b(hand):
     hold_message = "Hold this position for 3 seconds"
     non_thumb_fingers = [finger for finger in Finger if finger != Finger.THUMB]
     step1_constraints = []
@@ -43,17 +43,18 @@ def exercise4a(hand):
     step2_constraints = []
     for finger in non_thumb_fingers:
         step2_constraints.append(
-            AngleConstraint(130, finger, Joint.FIRST, False)
+            AngleConstraint(150, finger, Joint.FIRST, True)
         )
         step2_constraints.append(
-            AngleConstraint(140, finger, Joint.SECOND, True)
+            AngleConstraint(140, finger, Joint.SECOND, False)
         )
         step2_constraints.append(
-            AngleConstraint(160, finger, Joint.THIRD, True)
+            AngleConstraint(140, finger, Joint.THIRD, False)
         )
 
     step2 = AngleConstraintStep(hand, Instruction(
-        "Bend the tips of your fingers into the “hook” position with your knuckles pointing up ", None),
+        "Make a “tabletop” with your fingers by bending at your bottom knuckle and keeping the fingers straight ",
+        None),
                                 step2_constraints
                                 )
     step2_hold = AngleConstraintHoldStep(hand, Instruction(hold_message, None), 3,
@@ -69,25 +70,14 @@ def exercise4a(hand):
             AngleConstraint(140, finger, Joint.SECOND, True)
         )
         step3_constraints.append(
-            AngleConstraint(160, finger, Joint.THIRD, True)
+            AngleConstraint(100, finger, Joint.THIRD, False)
         )
 
-    step3_constraints.append(
-        AngleConstraint(170, Finger.THUMB, Joint.FIRST, True)
-    )
-    step3_constraints.append(
-        AngleConstraint(170, Finger.THUMB, Joint.SECOND, True)
-    )
-
-    step3_constraints.append(
-        AngleConstraint(150, Finger.THUMB, Joint.THIRD, True)
-    )
-
     step3 = AngleConstraintStep(hand, Instruction(
-        "Make a tight fist with your thumb over your fingers", None),
+        "Bend your fingers at the middle joint, touching your fingers to your palm ", None),
                                 step3_constraints
                                 )
-    step3_hold = AngleConstraintHoldStep(hand, Instruction(hold_message, None), 3,
+    step3_hold = AngleConstraintHoldStep(hand, Instruction(hold_message, None), 4,
                                          step3_constraints
                                          )
 
@@ -103,4 +93,4 @@ def exercise4a(hand):
 
 
 if __name__ == '__main__':
-    exercise4a("Right")
+    exercise4b("Right")

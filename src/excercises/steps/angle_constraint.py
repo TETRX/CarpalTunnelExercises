@@ -14,7 +14,7 @@ class AngleConstraint:
             result = angle < self.angle
         else:
             result = angle > self.angle
-
+        #
         # if not result:
         #     print(f"Finger {self.finger}, joint {self.joint}, angle {angle}")
 
