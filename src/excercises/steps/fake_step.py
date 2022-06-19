@@ -6,7 +6,8 @@ from src.excercises.step import Step
 from src.excercises.step_verification_result import StepVerificationResult
 from google.protobuf.json_format import MessageToDict
 
-class FakeStep(Step): # keep your hand in frame for 2 seconds
+
+class FakeHandStep(Step): # keep your hand in frame for 2 seconds
     def __init__(self, which_hand: str):
         super().__init__(Instruction(f"Keep your "
                                      f"{which_hand.lower()} hand visible in your camera.",

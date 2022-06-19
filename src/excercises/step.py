@@ -1,4 +1,5 @@
 import abc
+from typing import NamedTuple
 
 
 class Step(abc.ABC):
@@ -6,5 +7,5 @@ class Step(abc.ABC):
         self.instruction = instruction
 
     @abc.abstractmethod
-    def verify(self, hands):
+    def verify(self, results: NamedTuple):
         pass
