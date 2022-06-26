@@ -17,7 +17,7 @@ class HandInFrameStep(Step):  # prompts us to get our hand in frame. We can pad 
 
     def verify(self, results: NamedTuple):
         if hasattr(results, "left_hand_landmarks") and (results.left_hand_landmarks is not None and self.which_hand ==
-                                                 "Left") or (
+                                                 "Left") or (hasattr(results, "left_hand_landmarks") and
                 results.right_hand_landmarks is
                                                                                         not None and self.which_hand
                                                                                         == "Right"):
