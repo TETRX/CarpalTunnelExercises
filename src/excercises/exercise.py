@@ -95,8 +95,8 @@ class WristExercise(Exercise):
         exercise_uncompleted = True
         with mp_holistic.Holistic(
                 model_complexity=2,
-                min_detection_confidence=0.8,
-                min_tracking_confidence=0.8,
+                min_detection_confidence=0.6,
+                min_tracking_confidence=0.6,
                 smooth_landmarks=True,
                 smooth_segmentation=True) as pose:
             while cap.isOpened() and exercise_uncompleted:
@@ -113,7 +113,9 @@ class WristExercise(Exercise):
                 image = cv2.flip(image, 1)
 
                 results = pose.process(image)
-                print(results.__dict__)
+
+                exercise_uncompleted = self.verify(results)
+
                 # Draw the hand annotations on the image.
                 image.flags.writeable = True
                 image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
