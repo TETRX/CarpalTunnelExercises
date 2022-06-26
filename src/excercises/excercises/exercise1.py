@@ -8,38 +8,76 @@ from src.excercises.steps.hand_in_frame_step import HandInFrameStep
 
 
 def exercise1(which_hand: str):
-    hold_message = "Hold this position for 3 seconds"
+    hold_time = 15
+    hold_message = f"Hold this position for {hold_time} seconds"
     step1_constraints = []
 
     step1_constraints.append(
-        WristAngleConstraint(120, False)
+        WristAngleConstraint(angle=95, smaller=True),
     )
     step1_constraints.append(
-        WristAngleConstraint(120, False)
+        WristAngleConstraint(angle=85, smaller=False),
     )
 
-    step1 = WristAngleConstraintStep(which_hand, Instruction("With your hand in front of you and your wrist straight, "
-                                                  "fully straighten all of your fingers", None),
+    step1 = WristAngleConstraintStep(which_hand, Instruction("With your hand in front of you and your elbow straight, "
+                                                  "bend your wrist down 90 degrees", None),
                                     step1_constraints
                                     )
-    step1_hold = WristAngleConstraintHoldStep(which_hand,
-                                             Instruction(hold_message, None), 3,
-                                             step1_constraints
-                                             )
 
+    step1_hold_constraints = []
+
+    step1_hold_constraints.append(
+        WristAngleConstraint(
+            angle=95,
+            smaller=True
+            ),
+    )
+    step1_hold_constraints.append(
+        WristAngleConstraint(
+            angle=75,
+            smaller=False
+            ),
+    )
+    step1_hold = WristAngleConstraintHoldStep(which_hand,
+                                             Instruction(hold_message, None), hold_time,
+                                             step1_hold_constraints
+                                             )
     step2_constraints = []
 
-    step2 = WristAngleConstraintStep(which_hand, Instruction(
-        "Bend the tips of your fingers into the “hook” position with your knuckles pointing up ", None),
+    step2_constraints.append(
+        WristAngleConstraint(angle=95, smaller=True),
+    )
+    step2_constraints.append(
+        WristAngleConstraint(angle=85, smaller=False),
+    )
+
+    step2 = WristAngleConstraintStep(which_hand, Instruction("Now perform the same excercise but bend your wrist the "
+                                                             "other way. With your hand in front of you and your elbow "
+                                                             "straight, "
+                                                  "bend your wrist up 90 degrees", None),
                                     step2_constraints
                                     )
-    step2_hold = WristAngleConstraintHoldStep(which_hand, Instruction(hold_message, None), 3,
-                                             step2_constraints
-                                             )
 
+    step2_hold_constraints = []
+
+    step2_hold_constraints.append(
+        WristAngleConstraint(
+            angle=95,
+            smaller=True
+            ),
+    )
+    step2_hold_constraints.append(
+        WristAngleConstraint(
+            angle=75,
+            smaller=False
+            ),
+    )
+    step2_hold = WristAngleConstraintHoldStep(which_hand,
+                                             Instruction(hold_message, None), hold_time,
+                                             step2_hold_constraints
+                                             )
     steps = [HandInFrameStep(which_hand),
-             step1, step1_hold,
-             step2, step2_hold,
+             step1, step1_hold, step2, step2_hold,
              ]
     instruction_display = InstructionDisplay()
     exercise = WristExercise(steps, instruction_display)
@@ -48,4 +86,4 @@ def exercise1(which_hand: str):
 
 
 if __name__ == '__main__':
-    exercise1("Right")
+    exercise1("Left")

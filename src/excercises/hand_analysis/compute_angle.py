@@ -76,29 +76,27 @@ def compute_wrist_angle(results, which_hand: str):
         # first get which landmarks of the hand a,b,c should be
         a = PoseLandmark.LEFT_ELBOW if which_hand == "Left" else PoseLandmark.RIGHT_ELBOW
         b = PoseLandmark.LEFT_WRIST if which_hand == "Left" else PoseLandmark.RIGHT_WRIST
-        c = Finger.MIDDLE + Joint.THIRD + 1
+        c = HandLandmark.MIDDLE_FINGER_TIP
 
         #  now get their respective coordinates
-        points_in_3d_space = {}
+        points_in_2d = {}
         for landmark in [a, b]:
-            points_in_3d_space[landmark] = (np.array(
+            points_in_2d[landmark] = (np.array(
                 [
                     pose.landmark[landmark].x,
                     pose.landmark[landmark].y,
-                    pose.landmark[landmark].z
                 ]
             ))
-        points_in_3d_space[c] = (np.array(
+        points_in_2d[c] = (np.array(
             [
                 hand.landmark[c].x,
                 hand.landmark[c].y,
-                hand.landmark[c].z
             ]
         ))
 
         # compute the angle
-        ba = points_in_3d_space[a]-points_in_3d_space[b]
-        bc = points_in_3d_space[c]-points_in_3d_space[b]
+        ba = points_in_2d[a]-points_in_2d[b]
+        bc = points_in_2d[c]-points_in_2d[b]
 
         cosine_angle = np.dot(ba, bc) / (np.linalg.norm(ba) * np.linalg.norm(bc))
         angle = np.arccos(cosine_angle)
