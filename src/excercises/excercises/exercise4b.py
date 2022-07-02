@@ -1,18 +1,23 @@
+import os
+
 from src.excercises.exercise import (
     Exercise,
     HandExercise,
 )
 from src.excercises.hand_analysis.compute_angle import Finger, Joint
 from src.excercises.instruction import Instruction
-from src.excercises.instruction_display import InstructionDisplay
+from src.excercises.instruction_display import TKInstructionDisplay, SimpleInstructionDisplay
 from src.excercises.steps.angle_constraint import HandAngleConstraint
 from src.excercises.steps.angle_constraint_hold_step import HandAngleConstraintHoldStep
 from src.excercises.steps.angle_constraint_step import HandAngleConstraintStep
 from src.excercises.steps.fake_step import FakeHandStep
 from src.excercises.steps.hand_in_frame_step import HandInFrameStep
+from src.img.img_process import get_img
 
 
-def exercise4b(hand):
+def exercise4b(hand, instruction_display, img_dir="../../../img/"):
+    img = [get_img(os.path.join(img_dir, f'ex4b/ex4b_{i}.png')) for i in range(1,4)]
+
     hold_message = "Hold this position for 3 seconds"
     non_thumb_fingers = [finger for finger in Finger if finger != Finger.THUMB]
     step1_constraints = []
@@ -35,11 +40,11 @@ def exercise4b(hand):
     )
 
     step1 = HandAngleConstraintStep(hand, Instruction("With your hand in front of you and your wrist straight, "
-                                                  "fully straighten all of your fingers", None),
+                                                  "fully straighten all of your fingers", img[0]),
                                     step1_constraints
                                     )
     step1_hold = HandAngleConstraintHoldStep(hand,
-                                             Instruction(hold_message, None), 3,
+                                             Instruction(hold_message, img[0]), 3,
                                              step1_constraints
                                              )
 
@@ -57,10 +62,10 @@ def exercise4b(hand):
 
     step2 = HandAngleConstraintStep(hand, Instruction(
         "Make a “tabletop” with your fingers by bending at your bottom knuckle and keeping the fingers straight ",
-        None),
+        img[1]),
                                     step2_constraints
                                     )
-    step2_hold = HandAngleConstraintHoldStep(hand, Instruction(hold_message, None), 3,
+    step2_hold = HandAngleConstraintHoldStep(hand, Instruction(hold_message, img[1]), 3,
                                              step2_constraints
                                              )
 
@@ -77,10 +82,10 @@ def exercise4b(hand):
         )
 
     step3 = HandAngleConstraintStep(hand, Instruction(
-        "Bend your fingers at the middle joint, touching your fingers to your palm ", None),
+        "Bend your fingers at the middle joint, touching your fingers to your palm ", img[2]),
                                     step3_constraints
                                     )
-    step3_hold = HandAngleConstraintHoldStep(hand, Instruction(hold_message, None), 4,
+    step3_hold = HandAngleConstraintHoldStep(hand, Instruction(hold_message, img[2]), 4,
                                              step3_constraints
                                              )
 
@@ -89,11 +94,11 @@ def exercise4b(hand):
              step2, step2_hold,
              step3, step3_hold
              ]
-    instruction_display = InstructionDisplay()
     exercise = HandExercise(steps, instruction_display)
 
     exercise.run()
 
 
 if __name__ == '__main__':
-    exercise4b("Right")
+    instruction_display = SimpleInstructionDisplay()
+    exercise4b("Right",instruction_display)

@@ -3,12 +3,12 @@ from typing import NamedTuple
 import cv2
 import mediapipe as mp
 
-from src.excercises.instruction_display import InstructionDisplay
+from src.excercises.instruction_display import TKInstructionDisplay
 from src.excercises.step_verification_result import StepVerificationResult
 
 
 class Exercise:
-    def __init__(self, steps, instruction_display: InstructionDisplay):
+    def __init__(self, steps, instruction_display: TKInstructionDisplay):
         self.steps = steps
         self.instruction_display = instruction_display
         self.current_step = 0

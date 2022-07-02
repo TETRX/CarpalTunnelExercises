@@ -1,13 +1,13 @@
 from src.excercises.exercise import WristExercise
 from src.excercises.instruction import Instruction
-from src.excercises.instruction_display import InstructionDisplay
+from src.excercises.instruction_display import TKInstructionDisplay, SimpleInstructionDisplay
 from src.excercises.steps.angle_constraint import WristAngleConstraint
 from src.excercises.steps.angle_constraint_hold_step import WristAngleConstraintHoldStep
 from src.excercises.steps.angle_constraint_step import WristAngleConstraintStep
 from src.excercises.steps.hand_in_frame_step import HandInFrameStep
 
 
-def exercise1(which_hand: str):
+def exercise1(which_hand: str, instruction_display):
     hold_time = 15
     hold_message = f"Hold this position for {hold_time} seconds"
     step1_constraints = []
@@ -79,11 +79,11 @@ def exercise1(which_hand: str):
     steps = [HandInFrameStep(which_hand),
              step1, step1_hold, step2, step2_hold,
              ]
-    instruction_display = InstructionDisplay()
     exercise = WristExercise(steps, instruction_display)
 
     exercise.run()
 
 
 if __name__ == '__main__':
-    exercise1("Left")
+    instruction_display = SimpleInstructionDisplay()
+    exercise1("Left", instruction_display)

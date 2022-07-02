@@ -3,7 +3,7 @@ import cv2
 from src.excercises.exercise import Exercise
 from src.excercises.hand_analysis.compute_angle import Finger, Joint
 from src.excercises.instruction import Instruction
-from src.excercises.instruction_display import InstructionDisplay
+from src.excercises.instruction_display import TKInstructionDisplay
 from src.excercises.steps.angle_constraint import HandAngleConstraint
 from src.excercises.steps.angle_constraint_hold_step import HandAngleConstraintHoldStep
 from src.excercises.steps.angle_constraint_step import HandAngleConstraintStep

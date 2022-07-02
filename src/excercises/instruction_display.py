@@ -4,8 +4,26 @@ from threading import Condition
 from PIL import Image, ImageTk
 import cv2
 
+class SimpleInstructionDisplay:
+    def __init__(self):
+        pass
 
-class InstructionDisplay:
+    def run(self):
+        pass
+
+    def mark_ready(self):
+        pass
+
+    def display_instruction(self, instruction):
+        print(instruction.text)
+
+    def display_success(self):
+        print("Success")
+
+    def close_window(self):
+        pass
+
+class TKInstructionDisplay:
     def __init__(self, success_image=None):
         self.instruction_label = None
         self.img_label = None
