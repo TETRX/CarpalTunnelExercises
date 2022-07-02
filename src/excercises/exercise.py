@@ -77,9 +77,10 @@ class HandExercise(Exercise):
                             mp_drawing_styles.get_default_hand_landmarks_style(),
                             mp_drawing_styles.get_default_hand_connections_style())
 
-                cv2.imshow('MediaPipe Hands', image)
+                cv2.imshow('Camera View', image)
                 if cv2.waitKey(5) & 0xFF == 27:
                     break
+        cv2.destroyAllWindows()
         cap.release()
 
 
