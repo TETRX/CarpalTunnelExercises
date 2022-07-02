@@ -5,7 +5,7 @@ from src.excercises.step_verification_result import StepVerificationResult
 from google.protobuf.json_format import MessageToDict
 
 
-class HandAngleConstraintHoldStep(Step):
+class HandConstraintHoldStep(Step):
     def __init__(self, which_hand: str, instruction, hold_time, constraints):
         super().__init__(instruction)
         self.which_hand = which_hand
@@ -38,7 +38,7 @@ class HandAngleConstraintHoldStep(Step):
         return StepVerificationResult.FAILURE
 
 
-class WristAngleConstraintHoldStep(Step):
+class WristConstraintHoldStep(Step):
     def __init__(self, which_hand: str, instruction, hold_time, constraints):
         super().__init__(instruction)
         self.which_hand = which_hand

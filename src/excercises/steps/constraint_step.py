@@ -11,7 +11,7 @@ from src.excercises.steps.angle_constraint import (
 )
 
 
-class HandAngleConstraintStep(Step):
+class HandConstraintStep(Step):
     def __init__(self, which_hand: str, instruction, constraints, frames_to_start=3):
         super().__init__(instruction)
         self.which_hand = which_hand
@@ -47,7 +47,7 @@ class HandAngleConstraintStep(Step):
         return StepVerificationResult.FAILURE
 
 
-class WristAngleConstraintStep(Step):
+class WristConstraintStep(Step):
     def __init__(self, which_hand: str, instruction, constraints: List[AngleConstraint], frames_to_start=3):
         super().__init__(instruction)
         self.which_hand = which_hand

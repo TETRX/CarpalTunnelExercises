@@ -5,8 +5,8 @@ from src.excercises.hand_analysis.compute_angle import Finger, Joint
 from src.excercises.instruction import Instruction
 from src.excercises.instruction_display import TKInstructionDisplay
 from src.excercises.steps.angle_constraint import HandAngleConstraint
-from src.excercises.steps.angle_constraint_hold_step import HandAngleConstraintHoldStep
-from src.excercises.steps.angle_constraint_step import HandAngleConstraintStep
+from src.excercises.steps.constraint_hold_step import HandConstraintHoldStep
+from src.excercises.steps.constraint_step import HandConstraintStep
 from src.excercises.steps.fake_step import FakeHandStep
 from src.excercises.steps.hand_in_frame_step import HandInFrameStep
 import mediapipe as mp

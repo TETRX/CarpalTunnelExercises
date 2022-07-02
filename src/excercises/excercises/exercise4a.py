@@ -11,8 +11,8 @@ from src.excercises.hand_analysis.compute_angle import Finger, Joint
 from src.excercises.instruction import Instruction
 from src.excercises.instruction_display import TKInstructionDisplay, SimpleInstructionDisplay
 from src.excercises.steps.angle_constraint import HandAngleConstraint
-from src.excercises.steps.angle_constraint_hold_step import HandAngleConstraintHoldStep
-from src.excercises.steps.angle_constraint_step import HandAngleConstraintStep
+from src.excercises.steps.constraint_hold_step import HandConstraintHoldStep
+from src.excercises.steps.constraint_step import HandConstraintStep
 from src.excercises.steps.fake_step import FakeHandStep
 from src.excercises.steps.hand_in_frame_step import HandInFrameStep
 from src.img.img_process import get_img
@@ -44,14 +44,14 @@ def exercise4a(hand, instruction_display, img_dir="../../../img/"):
         HandAngleConstraint(120, Finger.THUMB, Joint.SECOND, False)
     )
 
-    step1 = HandAngleConstraintStep(hand, Instruction("With your hand in front of you and your wrist straight, "
+    step1 = HandConstraintStep(hand, Instruction("With your hand in front of you and your wrist straight, "
                                                   "fully straighten all of your fingers", img1),
-                                    step1_constraints
-                                    )
-    step1_hold = HandAngleConstraintHoldStep(hand,
-                                             Instruction(hold_message, img1), 3,
-                                             step1_constraints
-                                             )
+                               step1_constraints
+                               )
+    step1_hold = HandConstraintHoldStep(hand,
+                                        Instruction(hold_message, img1), 3,
+                                        step1_constraints
+                                        )
 
     step2_constraints = []
     for finger in non_thumb_fingers:
@@ -65,13 +65,13 @@ def exercise4a(hand, instruction_display, img_dir="../../../img/"):
             HandAngleConstraint(160, finger, Joint.THIRD, True)
         )
 
-    step2 = HandAngleConstraintStep(hand, Instruction(
+    step2 = HandConstraintStep(hand, Instruction(
         "Bend the tips of your fingers into the “hook” position with your knuckles pointing up ", img2),
-                                    step2_constraints
-                                    )
-    step2_hold = HandAngleConstraintHoldStep(hand, Instruction(hold_message, img2), 3,
-                                             step2_constraints
-                                             )
+                               step2_constraints
+                               )
+    step2_hold = HandConstraintHoldStep(hand, Instruction(hold_message, img2), 3,
+                                        step2_constraints
+                                        )
 
     step3_constraints = []
     for finger in non_thumb_fingers:
@@ -96,13 +96,13 @@ def exercise4a(hand, instruction_display, img_dir="../../../img/"):
         HandAngleConstraint(150, Finger.THUMB, Joint.THIRD, True)
     )
 
-    step3 = HandAngleConstraintStep(hand, Instruction(
+    step3 = HandConstraintStep(hand, Instruction(
         "Make a tight fist with your thumb over your fingers", img3),
-                                    step3_constraints
-                                    )
-    step3_hold = HandAngleConstraintHoldStep(hand, Instruction(hold_message, img3), 3,
-                                             step3_constraints
-                                             )
+                               step3_constraints
+                               )
+    step3_hold = HandConstraintHoldStep(hand, Instruction(hold_message, img3), 3,
+                                        step3_constraints
+                                        )
 
     steps = [HandInFrameStep(hand),
              step1, step1_hold,
