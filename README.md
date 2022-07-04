@@ -6,8 +6,8 @@ This is a project made as part of the Computer Science in Medicine course at the
 We based the exercises used in this app on ones presented in the [doc](https://orthoinfo.aaos.org/globalassets/pdfs/a00789_therapeutic-exercise-program-for-carpal-tunnel_final.pdf?fbclid=IwAR0VP55rjsGtpE0BtL1mOCRiHfpznRW2n96hAvBN_Z74PQKfQm0UMeVb9IY) published by The American Academy of Orthopaedic Surgeons. Please read it before using the app.
 
 ## Prerequirements
- - `python` w wersji `3.8` lub wyższej
- - `pip` w wersji `21` lub wyższej
+ - `python` version `3.8` or higher
+ - `pip` version `21` or higher
  - Recommended os: `Ubuntu 20.04`
 
 ## Installation
