@@ -6,9 +6,20 @@ from mediapipe.python.solutions.pose import PoseLandmark
 
 class HandDirectionConstraint:
     def __init__(self, points_up: bool):
+        """
+        Declare a constraint on the direction the hand is facing.
+
+        :param points_up: True if hand should be pointing up
+        """
         self.points_up = points_up
 
     def verify(self, results: NamedTuple, which_hand: str):
+        """
+
+        :param results: Return value of running MediaPipe.Hands.process(image)
+        :param which_hand: Either 'right' or 'left'
+        :return:
+        """
         hand = results.left_hand_landmarks if which_hand == "Left" else results.right_hand_landmarks
         pose = results.pose_landmarks
         if hand:

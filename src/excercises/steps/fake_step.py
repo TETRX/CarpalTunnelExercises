@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from typing import NamedTuple
 
 from src.excercises.hand_analysis.compute_angle import compute_joint_angle, Finger, Joint
 from src.excercises.instruction import Instruction
@@ -9,6 +10,10 @@ from google.protobuf.json_format import MessageToDict
 
 class FakeHandStep(Step): # keep your hand in frame for 2 seconds
     def __init__(self, which_hand: str):
+        """
+
+        :param which_hand: Either 'right' or 'left'
+        """
         super().__init__(Instruction(f"Keep your "
                                      f"{which_hand.lower()} hand visible in your camera.",
                               None  # TODO
@@ -16,7 +21,12 @@ class FakeHandStep(Step): # keep your hand in frame for 2 seconds
         self.which_hand = which_hand
         self.time_started_step = None
 
-    def verify(self, hands):
+    def verify(self, hands: NamedTuple):
+        """
+
+        :param hands: Results of running MediaPipe.Hands.process(image)
+        :return:
+        """
         if hands.multi_handedness is not None:
             for classification in hands.multi_handedness:
                 handedness = MessageToDict(classification)

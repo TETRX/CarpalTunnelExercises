@@ -7,6 +7,13 @@ from google.protobuf.json_format import MessageToDict
 
 class HandConstraintHoldStep(Step):
     def __init__(self, which_hand: str, instruction, hold_time, constraints):
+        """
+
+        :param which_hand: Either 'right' or 'left'
+        :param instruction: Instruction for the user
+        :param hold_time:
+        :param constraints:
+        """
         super().__init__(instruction)
         self.which_hand = which_hand
         self.time_started_step = None

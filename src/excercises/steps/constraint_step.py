@@ -12,7 +12,15 @@ from src.excercises.steps.angle_constraint import (
 
 
 class HandConstraintStep(Step):
-    def __init__(self, which_hand: str, instruction, constraints, frames_to_start=3):
+    def __init__(self, which_hand: str, instruction, constraints: List[AngleConstraint], frames_to_start=3):
+        """
+        This class represents all the constraints and data related to a single step of an exercise to perform.
+
+        :param which_hand: Either 'right' or 'left'
+        :param instruction: Instruction for the user to perform
+        :param constraints: Set of constraints that need to be satisfied for the step to be considered complete
+        :param frames_to_start:
+        """
         super().__init__(instruction)
         self.which_hand = which_hand
         self.time_started_step = None
@@ -20,7 +28,13 @@ class HandConstraintStep(Step):
         self.frames_to_start = 3
         self.frame_streak = 0
 
-    def verify(self, hands):
+    def verify(self, hands) -> StepVerificationResult:
+        """
+        Verifies all constraints of this Step. Returns a StepVerificationResult
+
+        :param hands:
+        :return:
+        """
         if hands.multi_handedness is not None:
             for classification in hands.multi_handedness:
                 handedness = MessageToDict(classification)
@@ -49,6 +63,14 @@ class HandConstraintStep(Step):
 
 class WristConstraintStep(Step):
     def __init__(self, which_hand: str, instruction, constraints: List[AngleConstraint], frames_to_start=3):
+        """
+        This class represents all the constraints and data related to a single step of an exercise to perform.
+
+        :param which_hand: Either 'right' or 'left'
+        :param instruction: Instruction for the user to perform
+        :param constraints: Set of constraints that need to be satisfied for the step to be considered complete
+        :param frames_to_start:
+        """
         super().__init__(instruction)
         self.which_hand = which_hand
         self.time_started_step = None

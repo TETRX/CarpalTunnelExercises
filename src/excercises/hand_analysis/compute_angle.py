@@ -1,4 +1,5 @@
 from enum import Enum, IntEnum
+from typing import NamedTuple
 
 from google.protobuf.json_format import MessageToDict
 from mediapipe.python.solutions.holistic import PoseLandmark, HandLandmark
@@ -19,7 +20,15 @@ class Joint(IntEnum):
     THIRD = 2
 
 
-def compute_joint_angle(hands, which_hand: str, finger, joint):
+def compute_joint_angle(hands: NamedTuple, which_hand: str, finger: Finger, joint: Joint):
+    """
+
+    :param hands: Return value of MediaPipe.Hands.process(image)
+    :param which_hand: Either 'right' or 'left'
+    :param finger: Enum specifying which finger is the constraint for; numeration is consistent with MediaPipe hand landmark model https://google.github.io/mediapipe/solutions/hands.html#hand-landmark-model
+    :param joint: Enum specifying which joint is the constraint for; numeration is consistent with MediaPipe hand landmark model https://google.github.io/mediapipe/solutions/hands.html#hand-landmark-model
+    :return:
+    """
     for hand, handedness in zip(hands.multi_hand_world_landmarks, hands.multi_handedness):
         handedness = MessageToDict(handedness)
         hand_which_hand = handedness["classification"][0]["label"]
@@ -62,6 +71,12 @@ def compute_joint_angle(hands, which_hand: str, finger, joint):
 
 
 def compute_wrist_angle(results, which_hand: str):
+    """
+
+    :param results: Return value of MediaPipe.Holistic.process(image)
+    :param which_hand: Either 'right' or 'left'
+    :return:
+    """
     hand = results.left_hand_landmarks if which_hand == "Left" else results.right_hand_landmarks
     pose = results.pose_landmarks
     if hand:
